@@ -5,6 +5,10 @@ var game = {
   food: null,
   setup: function() {
     this.snake = new snake();
+    this.snake.body.push(new bodyPiece(this.snake.x, this.snake.y, false));
+    this.snake.body.push(new bodyPiece(this.snake.x + 20, this.snake.y, false));
+    this.snake.body.push(new bodyPiece(this.snake.x + 40, this.snake.y, false));
+    this.snake.moveLeft();
     this.food = new food();
     this.food.replace();
     //canvas set
@@ -22,10 +26,8 @@ var game = {
     game.clearMap();
     game.food.draw();
     game.snake.update();
-    //game.snake.stop();
     game.snake.draw();
     game.snake.eat(game.food);
-
   },
   clearMap: function() {
     this.context.clearRect(0, 0, 600, 400);

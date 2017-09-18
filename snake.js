@@ -1,48 +1,81 @@
 function snake() {
   this.x = 300;
   this.y = 200;
-  this.size = 18;
+  this.size = 16;
   this.jump = 20;
   this.speedX = 0;
   this.speedY = 0;
   this.body = [];
+  this.dir = 'left';
 
   this.update = function() {
     this.x += this.speedX;
     this.y += this.speedY;
+
+    this.body.unshift(new bodyPiece(this.x, this.y, false));
+    if (this.body[this.body.length - 1].foodIn == true) {
+      this.body[this.body.length - 1].foodIn = false;
+    } else {
+      this.body.pop();
+    }
   }
 
   this.draw = function() {
-    game.context.fillRect(this.x + 1, this.y + 1, this.size, this.size);
+    for (var i = 0; i < this.body.length; i++) {
+      if (this.body[i].foodIn == true) {
+        game.context.fillRect(this.body[i].x, this.body[i].y, this.size + 4, this.size + 4);
+      } else {
+        game.context.fillRect(this.body[i].x + 2, this.body[i].y + 2, this.size, this.size);
+      }
+    }
   }
 
   this.moveLeft = function() {
-    this.speedX = -1 * this.jump;
-    this.speedY = 0;
+    if (this.dir != 'right') {
+      this.speedX = -1 * this.jump;
+      this.speedY = 0;
+      this.dir = 'left';
+    }
   }
 
   this.moveRight = function() {
-    this.speedX = 1 * this.jump;
-    this.speedY = 0;
+    if (this.dir != 'left') {
+      this.speedX = 1 * this.jump;
+      this.speedY = 0;
+      this.dir = 'right';
+    }
   }
 
   this.moveUp = function() {
-    this.speedX = 0;
-    this.speedY = -1 * this.jump;
+    if (this.dir != 'down') {
+      this.speedX = 0;
+      this.speedY = -1 * this.jump;
+      this.dir = 'up';
+    }
   }
 
   this.moveDown = function() {
-    this.speedX = 0;
-    this.speedY = 1 * this.jump;
+    if (this.dir != 'up') {
+      this.speedX = 0;
+      this.speedY = 1 * this.jump;
+      this.dir = 'down';
+    }
   }
   this.stop = function() {
     this.speedX = 0;
     this.speedY = 0;
-}
+  }
 
-  this.eat = function(foo) {
-    if (this.x == foo.x && this.y == foo.y) {
-      foo.replace();
+  this.eat = function(food) {
+    if (this.x == food.x && this.y == food.y) {
+      this.body[0].foodIn = true;
+      food.replace();
     }
   }
+}
+
+function bodyPiece(x, y, foodIn) {
+  this.x = x;
+  this.y = y;
+  this.foodIn = foodIn;
 }

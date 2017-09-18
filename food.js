@@ -8,6 +8,7 @@ function food() {
     var cols = 600 / 20;
     this.x = random(cols) * 20;
     this.y = random(rows) * 20;
+    console.log(game.snake.body);
   }
 
   this.draw = function() {
