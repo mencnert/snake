@@ -5,24 +5,44 @@ function snake() {
   this.jump = 20;
   this.speedX = 0;
   this.speedY = 0;
+  this.body = [];
+
   this.update = function() {
     this.x += this.speedX;
     this.y += this.speedY;
   }
+
+  this.draw = function() {
+    game.context.fillRect(this.x + 1, this.y + 1, this.size, this.size);
+  }
+
   this.moveLeft = function() {
     this.speedX = -1 * this.jump;
     this.speedY = 0;
   }
+
   this.moveRight = function() {
     this.speedX = 1 * this.jump;
     this.speedY = 0;
   }
+
   this.moveUp = function() {
     this.speedX = 0;
     this.speedY = -1 * this.jump;
   }
+
   this.moveDown = function() {
     this.speedX = 0;
     this.speedY = 1 * this.jump;
+  }
+  this.stop = function() {
+    this.speedX = 0;
+    this.speedY = 0;
+}
+
+  this.eat = function(foo) {
+    if (this.x == foo.x && this.y == foo.y) {
+      foo.replace();
+    }
   }
 }

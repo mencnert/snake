@@ -2,13 +2,17 @@ var game = {
   canvas: document.createElement("canvas"),
   context: null,
   snake: null,
+  food: null,
   setup: function() {
     this.snake = new snake();
+    this.food = new food();
+    this.food.replace();
     //canvas set
     this.canvas.width = 600;
     this.canvas.height = 400;
     this.canvas.style.backgroundColor = "#9bc70e";
     this.context = this.canvas.getContext("2d");
+    this.context.fillStyle = "black";
     var div = document.getElementById('snake');
     div.appendChild(this.canvas);
     //game loop
@@ -16,18 +20,17 @@ var game = {
   },
   run: function() {
     game.clearMap();
+    game.food.draw();
     game.snake.update();
-    game.draw();
+    //game.snake.stop();
+    game.snake.draw();
+    game.snake.eat(game.food);
+
   },
   clearMap: function() {
     this.context.clearRect(0, 0, 600, 400);
   },
-  draw: function() {
-    this.context.fillStyle = "black";
-    this.context.fillRect(this.snake.x + 1, this.snake.y + 1, this.snake.size, this.snake.size);
-  },
 };
-
 
 $(document).keydown(function(e) {
   switch (e.which) {
@@ -48,3 +51,7 @@ $(document).keydown(function(e) {
       break;
   }
 });
+
+function random(num) {
+  return Math.floor(Math.random() * num);
+}
