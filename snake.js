@@ -11,6 +11,11 @@ function snake() {
   this.update = function() {
     this.x += this.speedX;
     this.y += this.speedY;
+    //teleport snake with one bodyPiece delay
+    this.x = (this.x === 620) ? 0 : this.x;
+    this.x = (this.x === -20) ? 600 : this.x;
+    this.y = (this.y === 420) ? 0 : this.y;
+    this.y = (this.y === -20) ? 400 : this.y;
 
     this.body.unshift(new bodyPiece(this.x, this.y, false));
     if (this.body[this.body.length - 1].foodIn == true) {
