@@ -84,16 +84,19 @@ function snake() {
     this.speedY = 0;
   }
 
-  this.eat = function(food) {
+  this.eat = function(food, score) {
     if (this.x == food.x && this.y == food.y) {
       this.body[0].foodIn = true;
+      score++;
       while (food.replace(this.body)) {}
     }
+    return score;
   }
 
   this.death = function(x, y) {
     this.body.forEach(function(bodyPiece) {
       if (bodyPiece.x === x && bodyPiece.y === y) {
+        alert("score: " + game.score);
         game.load();
       }
     })

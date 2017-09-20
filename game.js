@@ -3,6 +3,7 @@ var game = {
   context: null,
   snake: null,
   food: null,
+  score: 0,
   setup: function() {
     this.load();
     //canvas set
@@ -14,7 +15,7 @@ var game = {
     var div = document.getElementById('snake');
     div.appendChild(this.canvas);
     //game loop
-    setInterval(this.run, 200);
+    setInterval(this.run, 150);
   },
 
   run: function() {
@@ -22,7 +23,9 @@ var game = {
     game.food.draw();
     game.snake.update();
     game.snake.draw();
-    game.snake.eat(game.food);
+    game.score = game.snake.eat(game.food, game.score);
+    document.getElementById('score').innerHTML = "score: " + game.score;
+
   },
 
   clearMap: function() {
@@ -39,6 +42,7 @@ var game = {
         false))
     }
 
+    this.score = 0;
     this.snake.moveLeft();
     this.food = new food();
     this.food.replace(this.snake.body);
