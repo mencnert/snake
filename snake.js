@@ -74,7 +74,7 @@ function snake() {
   this.eat = function(food) {
     if (this.x == food.x && this.y == food.y) {
       this.body[0].foodIn = true;
-      food.replace();
+      while (food.replace(this.body)) {}
     }
   }
 }
