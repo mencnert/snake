@@ -13,6 +13,16 @@ function snake() {
     this.x += this.speedX;
     this.y += this.speedY;
 
+    if (this.speedX === -1 * this.jump && this.speedY === 0) {
+      this.dir = 'left';
+    } else if (this.speedX === 1 * this.jump && this.speedY === 0) {
+      this.dir = 'right';
+    } else if (this.speedX === 0 && this.speedY === -1 * this.jump) {
+      this.dir = 'up';
+    } else {
+      this.dir = 'down';
+    }
+
     this.x = (this.x === 600) ? 0 : this.x;
     this.x = (this.x === -20) ? 580 : this.x;
     this.y = (this.y === 400) ? 0 : this.y;
@@ -51,7 +61,6 @@ function snake() {
     if (this.dir != 'right') {
       this.speedX = -1 * this.jump;
       this.speedY = 0;
-      this.dir = 'left';
     }
   }
 
@@ -59,7 +68,6 @@ function snake() {
     if (this.dir != 'left') {
       this.speedX = 1 * this.jump;
       this.speedY = 0;
-      this.dir = 'right';
     }
   }
 
@@ -67,7 +75,6 @@ function snake() {
     if (this.dir != 'down') {
       this.speedX = 0;
       this.speedY = -1 * this.jump;
-      this.dir = 'up';
     }
   }
 
@@ -75,13 +82,7 @@ function snake() {
     if (this.dir != 'up') {
       this.speedX = 0;
       this.speedY = 1 * this.jump;
-      this.dir = 'down';
     }
-  }
-
-  this.stop = function() {
-    this.speedX = 0;
-    this.speedY = 0;
   }
 
   this.eat = function(food, score) {
