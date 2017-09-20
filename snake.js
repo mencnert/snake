@@ -18,12 +18,14 @@ function snake() {
     this.y = (this.y === 400) ? 0 : this.y;
     this.y = (this.y === -20) ? 380 : this.y;
 
-    this.body.unshift(new bodyPiece(this.x, this.y, false));
     if (this.body[len - 1].foodIn) {
       this.body[len - 1].foodIn = false;
     } else {
       this.body.pop();
     }
+    this.death(this.x, this.y);
+    this.body.unshift(new bodyPiece(this.x, this.y, false));
+
   }
 
   this.draw = function() {
@@ -87,6 +89,14 @@ function snake() {
       this.body[0].foodIn = true;
       while (food.replace(this.body)) {}
     }
+  }
+
+  this.death = function(x, y) {
+    this.body.forEach(function(bodyPiece) {
+      if (bodyPiece.x === x && bodyPiece.y === y) {
+        game.load();
+      }
+    })
   }
 }
 

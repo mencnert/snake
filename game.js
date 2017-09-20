@@ -4,18 +4,7 @@ var game = {
   snake: null,
   food: null,
   setup: function() {
-    this.snake = new snake();
-
-    for (var i = 0; i < 5; i++) {
-      this.snake.body.push(new bodyPiece(
-        this.snake.x + i * this.snake.jump,
-        this.snake.y,
-        false))
-    }
-
-    this.snake.moveLeft();
-    this.food = new food();
-    this.food.replace(this.snake.body);
+    this.load();
     //canvas set
     this.canvas.width = 600;
     this.canvas.height = 400;
@@ -38,6 +27,21 @@ var game = {
 
   clearMap: function() {
     this.context.clearRect(0, 0, 600, 400);
+  },
+
+  load: function() {
+    this.snake = new snake();
+
+    for (var i = 0; i < 5; i++) {
+      this.snake.body.push(new bodyPiece(
+        this.snake.x + i * this.snake.jump,
+        this.snake.y,
+        false))
+    }
+
+    this.snake.moveLeft();
+    this.food = new food();
+    this.food.replace(this.snake.body);
   },
 };
 
