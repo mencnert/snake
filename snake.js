@@ -9,28 +9,38 @@ function snake() {
   this.dir = 'left';
 
   this.update = function() {
+    var len = this.body.length;
     this.x += this.speedX;
     this.y += this.speedY;
-    //teleport snake with one bodyPiece delay
-    this.x = (this.x === 620) ? 0 : this.x;
-    this.x = (this.x === -20) ? 600 : this.x;
-    this.y = (this.y === 420) ? 0 : this.y;
-    this.y = (this.y === -20) ? 400 : this.y;
+
+    this.x = (this.x === 600) ? 0 : this.x;
+    this.x = (this.x === -20) ? 580 : this.x;
+    this.y = (this.y === 400) ? 0 : this.y;
+    this.y = (this.y === -20) ? 380 : this.y;
 
     this.body.unshift(new bodyPiece(this.x, this.y, false));
-    if (this.body[this.body.length - 1].foodIn == true) {
-      this.body[this.body.length - 1].foodIn = false;
+    if (this.body[len - 1].foodIn) {
+      this.body[len - 1].foodIn = false;
     } else {
       this.body.pop();
     }
   }
 
   this.draw = function() {
-    for (var i = 0; i < this.body.length; i++) {
-      if (this.body[i].foodIn == true) {
-        game.context.fillRect(this.body[i].x, this.body[i].y, this.size + 4, this.size + 4);
+    var len = this.body.length;
+    for (var i = 0; i < len; i++) {
+      if (this.body[i].foodIn) {
+        game.context.fillRect(
+          this.body[i].x,
+          this.body[i].y,
+          this.size + 4,
+          this.size + 4);
       } else {
-        game.context.fillRect(this.body[i].x + 2, this.body[i].y + 2, this.size, this.size);
+        game.context.fillRect(
+          this.body[i].x + 2,
+          this.body[i].y + 2,
+          this.size,
+          this.size);
       }
     }
   }
@@ -66,6 +76,7 @@ function snake() {
       this.dir = 'down';
     }
   }
+
   this.stop = function() {
     this.speedX = 0;
     this.speedY = 0;
@@ -78,6 +89,7 @@ function snake() {
     }
   }
 }
+
 
 function bodyPiece(x, y, foodIn) {
   this.x = x;

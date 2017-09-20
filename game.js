@@ -27,6 +27,7 @@ var game = {
     //game loop
     setInterval(this.run, 200);
   },
+
   run: function() {
     game.clearMap();
     game.food.draw();
@@ -34,6 +35,7 @@ var game = {
     game.snake.draw();
     game.snake.eat(game.food);
   },
+
   clearMap: function() {
     this.context.clearRect(0, 0, 600, 400);
   },
