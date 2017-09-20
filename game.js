@@ -5,12 +5,17 @@ var game = {
   food: null,
   setup: function() {
     this.snake = new snake();
-    this.snake.body.push(new bodyPiece(this.snake.x, this.snake.y, false));
-    this.snake.body.push(new bodyPiece(this.snake.x + 20, this.snake.y, false));
-    this.snake.body.push(new bodyPiece(this.snake.x + 40, this.snake.y, false));
+
+    for (var i = 0; i < 5; i++) {
+      this.snake.body.push(new bodyPiece(
+        this.snake.x + i * this.snake.jump,
+        this.snake.y,
+        false))
+    }
+
     this.snake.moveLeft();
     this.food = new food();
-    this.food.replace();
+    this.food.replace(this.snake.body);
     //canvas set
     this.canvas.width = 600;
     this.canvas.height = 400;
