@@ -1,0 +1,82 @@
+/*reset*/
+
+html, body, nav, ul, li, i, canvas, div, p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+
+/*end reset*/
+
+body {
+  background-color: #272822;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 75px 1fr;
+}
+
+
+/*menu*/
+
+nav {
+  font-size: 300%;
+  text-align: center;
+  background-color: #191a17;
+  height: 100vh;
+}
+
+nav ul li {
+  border: 2px white solid;
+  padding: 2px;
+  margin: 5px;
+  border-radius: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+#home a:hover {
+  color: rgb(171, 2, 2);
+}
+
+#code a:hover {
+  color: rgb(17, 142, 100);
+}
+
+#linkedin:hover {
+  background-color: rgb(13, 91, 163);
+}
+
+
+/*end menu*/
+
+.gameplace {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.gameItem {
+  align-self: center;
+}
+
+#score {
+  align-self: start;
+  font-size: 150%;
+  color: white;
+}
+
+canvas {
+  border: 1px black solid;
+}
+
+@media (max-width: 650px) {
+  nav {
+    display: none;
+  }
+}
